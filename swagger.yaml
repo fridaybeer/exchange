@@ -4,7 +4,7 @@ schemes:
 - "http"
 
 info:
-  description: "Excange core functionality"
+  description: "Exchange core functionality"
   version: "1.0.0"
   title: "Exchange"
   termsOfService: "N/A"
@@ -29,7 +29,7 @@ paths:
       - "application/json"
       responses:
         200:
-          description: "susscefull operation"
+          description: "successful operation"
           schema:
             type: 'string'
 
@@ -142,7 +142,7 @@ paths:
         type: "integer"
       responses:
         200:
-          description: "susscefull operation"
+          description: "successful operation"
           schema:
             type: "string"
         400:
