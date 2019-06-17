@@ -1,6 +1,5 @@
 swagger: "2.0"
 schemes:
-- "https"
 - "http"
 
 info:
@@ -13,8 +12,8 @@ info:
   license:
     name: "Mit"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "exchange.swagger.io"
-basePath: "/v2"
+host: "localhost:8181"
+basePath: "/v1"
 
 paths:
 
