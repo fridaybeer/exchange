@@ -40,12 +40,17 @@ paths:
       summary: "Get trader current portfolio"
       description: ""
       operationId: "traderPortfolio"
+      security:
+      - accessToken: []
       produces:
       - "application/json"
+      consumes:
+      - application/x-www-form-urlencoded
+      - application/json
       parameters:
       - name: "token"
-        in: "path"
-        description: "trader"
+        in: "header"
+        description: "Trader Identifier"
         required: true
         type: "string"
       responses:
@@ -61,12 +66,17 @@ paths:
       summary: "Get all traders portfolios"
       description: ""
       operationId: "traderPortfolios"
+      security:
+      - accessToken: []
       produces:
       - "application/json"
+      consumes:
+      - application/x-www-form-urlencoded
+      - application/json
       parameters:
       - name: "token"
-        in: "path"
-        description: "trader"
+        in: "header"
+        description: "Trader Identifier"
         required: true
         type: "string"
       responses:
@@ -103,26 +113,30 @@ paths:
       summary: "Process trader order"
       description: ""
       operationId: "processOrder"
+      security:
+      - accessToken: []
       produces:
       - "application/json"
+      consumes:
+      - application/x-www-form-urlencoded
+      - application/json
       parameters:
+      - type: string
+        name: X-TOKEN
+        in: header
+        description: "Trander Identifier"
       - name: "type"
-        in: "path"
+        in: "formData"
         description: "Order type buy/sell"
         required: true
         type: "string"
-      - name: "token"
-        in: "path"
-        description: "trader identification token"
-        required: true
-        type: "string"
       - name: "asset"
-        in: "path"
+        in: "formData"
         description: "Asset name"
         required: true
         type: "string"
       - name: "quantity"
-        in: "path"
+        in: "formData"
         description: "Asset quantity"
         required: true
         type: "integer"
@@ -167,6 +181,13 @@ definitions:
       unitValue:
         type: "number"
         format: "float"
+
+securityDefinitions:
+  accessToken:
+    description: Worker identifier
+    type: apiKey
+    name: X-TOKEN
+    in: header
 
 externalDocs:
   description: "Find out more about Swagger"
