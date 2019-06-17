@@ -1,0 +1,173 @@
+swagger: "2.0"
+schemes:
+- "https"
+- "http"
+
+info:
+  description: "Excange core functionality"
+  version: "1.0.0"
+  title: "Exchange"
+  termsOfService: "N/A"
+  contact:
+    email: "email@email.com"
+  license:
+    name: "Mit"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "exchange.swagger.io"
+basePath: "/v2"
+
+paths:
+
+  /trader/register:
+    post:
+      tags:
+      - "trader"
+      summary: "Creates new trader"
+      description: ""
+      operationId: "createNewtrader"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "susscefull operation"
+          schema:
+            type: 'string'
+
+  /trader/portfolio:
+    get:
+      tags:
+      - "trader"
+      summary: "Get trader current portfolio"
+      description: ""
+      operationId: "traderPortfolio"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "token"
+        in: "path"
+        description: "trader"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Portfolio"
+
+  /trader/portfolios:
+    get:
+      tags:
+      - "trader"
+      summary: "Get all traders portfolios"
+      description: ""
+      operationId: "traderPortfolios"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "token"
+        in: "path"
+        description: "trader"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Portfolios"
+
+  /asset/list:
+    get:
+      tags:
+      - "asset"
+      summary: "List all assets"
+      description: ""
+      operationId: "assetList"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Assets"
+        404:
+          description: "Token not found"
+
+  /order:
+    post:
+      tags:
+      - "order"
+      summary: "Process trader order"
+      description: ""
+      operationId: "processOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "path"
+        description: "Order type buy/sell"
+        required: true
+        type: "string"
+      - name: "token"
+        in: "path"
+        description: "trader identification token"
+        required: true
+        type: "string"
+      - name: "asset"
+        in: "path"
+        description: "Asset name"
+        required: true
+        type: "string"
+      - name: "quantity"
+        in: "path"
+        description: "Asset quantity"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "susscefull operation"
+          schema:
+            type: "string"
+        400:
+          description: "invalid order"
+          schema:
+            type: "string"
+
+definitions:
+
+  Portfolios:
+    type: "object"
+    properties:
+      token:
+        type: "string"
+      portfolio:
+        $ref: "#/definitions/Portfolio"
+
+  Portfolio:
+    type: "array"
+    items:
+      $ref: "#/definitions/Assets"
+
+  Assets:
+    type: "object"
+    properties:
+      quantity:
+        type: "integer"
+      asset:
+        $ref: "#/definitions/Asset"
+
+  Asset:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      unitValue:
+        type: "number"
+        format: "float"
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
